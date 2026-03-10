@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emma & Ollie: Meadow Days</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Intro Screen -->
+  <div id="intro-screen">
+    <div class="intro-decor">~ * ~</div>
+    <h1 class="intro-title">Emma &amp; Ollie</h1>
+    <p class="intro-subtitle">Meadow Days</p>
+    <button id="begin-btn">Begin</button>
+    <p class="intro-note">move your mouse to guide ollie through the meadow</p>
+  </div>
+
+  <!-- HUD -->
+  <div id="hud">
+    <div class="hud-title">Emma &amp; Ollie: Meadow Days</div>
+    <div class="hud-right">
+      <div class="hud-flowers">
+        <span class="flower-icon">&#10047;</span>
+        <span id="flower-count">0</span>
+      </div>
+      <div class="joy-container">
+        <span class="joy-label">Joy</span>
+        <div class="joy-track">
+          <div class="joy-fill" id="joy-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notifications -->
+  <div id="toast-container"></div>
+
+  <!-- Three.js from CDN (r128) -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+
+  <!-- Game modules -->
+  <script type="module" src="src/main.js"></script>
+
+</body>
+</html>
