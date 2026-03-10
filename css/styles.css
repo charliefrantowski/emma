@@ -20,6 +20,14 @@ body {
   overflow: hidden;
   background: #C5D1BF;
   cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="10" cy="8" r="4" fill="%23D4A0A0" opacity="0.85"/><circle cx="22" cy="8" r="4" fill="%23D4A0A0" opacity="0.85"/><circle cx="7" cy="20" r="4" fill="%23D4A0A0" opacity="0.85"/><circle cx="25" cy="20" r="4" fill="%23D4A0A0" opacity="0.85"/><ellipse cx="16" cy="18" rx="8" ry="7" fill="%23D4A0A0"/></svg>') 16 16, auto;
+  /* iOS: prevent selection, callout, zoom gestures, rubber-band scroll */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: none;
+  overscroll-behavior: none;
+  /* Safe area for notched/Dynamic Island devices */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 canvas { display: block; }
@@ -59,6 +67,8 @@ canvas { display: block; }
 }
 
 #begin-btn {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   font-family: 'Quicksand', sans-serif;
   font-size: clamp(1rem, 2vw, 1.3rem);
   font-weight: 600;
@@ -102,6 +112,7 @@ canvas { display: block; }
   font-weight: 600;
   color: var(--warm-brown);
   background: rgba(253, 248, 240, 0.75);
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   padding: 0.5em 1em;
   border-radius: 16px;
@@ -116,6 +127,7 @@ canvas { display: block; }
   font-weight: 600;
   color: var(--warm-brown);
   background: rgba(253, 248, 240, 0.75);
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   padding: 0.5em 1em;
   border-radius: 16px;
@@ -127,6 +139,7 @@ canvas { display: block; }
 /* ── Joy Bar ── */
 .joy-container {
   background: rgba(253, 248, 240, 0.75);
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   border-radius: 16px;
   padding: 0.4em 0.8em;
@@ -173,6 +186,7 @@ canvas { display: block; }
   font-weight: 600;
   color: var(--warm-brown);
   background: rgba(253, 248, 240, 0.9);
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   padding: 0.6em 1.4em;
   border-radius: 50px;

@@ -23,7 +23,7 @@ const state = {
 let scene, camera, renderer, clock;
 let ollie, emma;
 let flowers, butterflies, grassTufts;
-const mouseTarget = new THREE.Vector3();
+const mouseTarget = new THREE.Vector3(0, 0, 3); // Start at Ollie's initial position
 
 // ── Initialisation ──────────────────────────────────────────────────
 function init() {
@@ -83,27 +83,45 @@ function init() {
   ollie = createOllie(scene);
   emma  = createEmma(scene);
 
-  // Input
+  // Input — mouse
   window.addEventListener('mousemove', e => {
     if (!state.gameStarted) return;
     updateMouseTarget(e.clientX, e.clientY, camera, mouseTarget);
   });
-  window.addEventListener('touchmove', e => {
+
+  // Input — touch (iOS + Android)
+  function handleTouch(e) {
     if (!state.gameStarted) return;
     e.preventDefault();
-    updateMouseTarget(e.touches[0].clientX, e.touches[0].clientY, camera, mouseTarget);
-  }, { passive: false });
+    if (e.touches.length > 0) {
+      updateMouseTarget(e.touches[0].clientX, e.touches[0].clientY, camera, mouseTarget);
+    }
+  }
+  window.addEventListener('touchstart', handleTouch, { passive: false });
+  window.addEventListener('touchmove', handleTouch, { passive: false });
+
+  // Resize
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  // Start button
-  document.getElementById('begin-btn').addEventListener('click', () => {
+  // Prevent iOS rubber-band scroll on the document
+  document.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
+
+  // Start button — works for both click and touch without 300ms delay
+  const beginBtn = document.getElementById('begin-btn');
+  function startGame() {
+    if (state.gameStarted) return;
     state.gameStarted = true;
     document.getElementById('intro-screen').classList.add('hidden');
     document.getElementById('hud').classList.add('visible');
+  }
+  beginBtn.addEventListener('click', startGame);
+  beginBtn.addEventListener('touchend', e => {
+    e.preventDefault(); // Prevent ghost click / 300ms delay
+    startGame();
   });
 
   // Go!
